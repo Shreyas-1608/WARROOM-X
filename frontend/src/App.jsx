@@ -21,7 +21,9 @@ import {
 import "./App.css";
 import GalaxyBackground from "./components/GalaxyBackground";
 
-const API = "http://127.0.0.1:8000";
+const API =
+  import.meta.env.VITE_API_URL ||
+  "http://127.0.0.1:8000";
 
 const DEMO_INCIDENT =
   "Production API is down immediately after a database connection-pool configuration change. Database connections are failing and users cannot access the application.";
