@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 
 import "./App.css";
+import GalaxyBackground from "./components/GalaxyBackground";
 
 const API = "http://127.0.0.1:8000";
 
@@ -417,6 +418,7 @@ function App() {
 
   return (
     <div className="app">
+      <GalaxyBackground />
       <aside className="sidebar">
         <div className="brand">
           <div className="brand-icon">

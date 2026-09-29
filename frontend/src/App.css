@@ -28,10 +28,8 @@ button {
 
 .app {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 84% 5%, rgba(64, 247, 174, 0.07), transparent 25%),
-    radial-gradient(circle at 50% 100%, rgba(0, 143, 255, 0.035), transparent 35%),
-    #04080a;
+  position: relative;
+  background: transparent;
 }
 
 /* SIDEBAR */
@@ -881,4 +879,480 @@ pre {
   .button-row button {
     width: 100%;
   }
+}
+
+/* =========================================
+   WARROOM X — GALAXY BACKGROUND
+   ========================================= */
+
+.galaxy-background {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.galaxy-background canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Keep all existing WARROOM X UI above galaxy */
+.sidebar,
+.main {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================
+   WARROOM X — GALAXY INTEGRATION FINAL
+   ========================================= */
+
+.app {
+  min-height: 100vh;
+  position: relative;
+  background: transparent;
+}
+
+/* Galaxy stays fixed behind the application */
+.galaxy-background {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  background: #000;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+.galaxy-background canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sidebar stays locked to viewport */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 280px;
+  height: 100vh;
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  z-index: 20;
+
+  background:
+    linear-gradient(180deg,
+      rgba(2, 10, 13, 0.97) 0%,
+      rgba(2, 8, 11, 0.96) 100%);
+
+  border-right: 1px solid rgba(64, 247, 174, 0.12);
+
+  box-shadow:
+    15px 0 50px rgba(0, 0, 0, 0.32);
+
+  backdrop-filter: blur(16px);
+}
+
+/* Main application stays correctly beside sidebar */
+.main {
+  position: relative;
+
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  min-height: 100vh;
+
+  padding: 38px 5% 70px;
+
+  z-index: 2;
+
+  background: transparent;
+}
+
+/* Slight dark veil so galaxy never destroys readability */
+.main::before {
+  content: "";
+
+  position: fixed;
+
+  top: 0;
+  left: 280px;
+  right: 0;
+  bottom: 0;
+
+  pointer-events: none;
+
+  z-index: -1;
+
+  background:
+    radial-gradient(circle at 55% 48%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.04) 42%,
+      rgba(0, 0, 0, 0.30) 100%);
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+    padding: 25px;
+  }
+
+  .main::before {
+    left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 18px;
+  }
+}
+
+/* =====================================================
+   WARROOM X — CINEMATIC GALAXY UI
+   Background first. Interface second.
+   ===================================================== */
+
+/* Main area */
+.main {
+  padding-top: 42px;
+  background: transparent;
+}
+
+/* REMOVE CARD FEEL FROM MAIN SECTIONS */
+.panel {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 24px 0;
+}
+
+/* No decorative top line */
+.hero-panel::before,
+.risk-hero::before {
+  display: none;
+}
+
+/* Active incident becomes floating content */
+.hero-panel {
+  max-width: 980px;
+  overflow: visible;
+}
+
+/* Main incident input = subtle glass only */
+.hero-panel textarea,
+.scanner textarea {
+  background: rgba(3, 9, 12, 0.58);
+  border: 1px solid rgba(130, 180, 200, 0.18);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
+    0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Let galaxy breathe */
+.hero-panel textarea {
+  min-height: 125px;
+}
+
+/* Engine strip should not look like another box */
+.engine-strip {
+  max-width: 980px;
+  border-bottom: 1px solid rgba(120, 180, 200, 0.10);
+}
+
+/* Tiny status pills */
+.engine-pill {
+  background: rgba(3, 10, 12, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+/* Stats become minimal */
+.stats {
+  max-width: 980px;
+}
+
+.stat-card {
+  min-height: auto;
+  padding: 12px 15px;
+
+  background: rgba(3, 10, 12, 0.45);
+  border: 1px solid rgba(120, 180, 200, 0.12);
+
+  backdrop-filter: blur(10px);
+}
+
+/* Intelligence results: light glass instead of heavy cards */
+.insight-card {
+  background: rgba(3, 9, 12, 0.58);
+  border: 1px solid rgba(120, 180, 200, 0.13);
+
+  backdrop-filter: blur(14px);
+}
+
+.insight-card.accent {
+  background:
+    linear-gradient(135deg,
+      rgba(64, 247, 174, 0.055),
+      rgba(3, 9, 12, 0.60));
+}
+
+/* Memory cards lighter */
+.memory-card {
+  background: rgba(3, 9, 12, 0.52);
+  backdrop-filter: blur(12px);
+}
+
+/* Inputs used after analysis */
+.teach-panel input,
+.teach-panel textarea,
+.teach-panel select,
+.search-row input {
+  background: rgba(3, 9, 12, 0.60);
+  backdrop-filter: blur(12px);
+}
+
+/* Remove dark veil — GALAXY MUST SHOW */
+.main::before {
+  background: transparent;
+}
+
+/* Header should float directly in space */
+header {
+  max-width: none;
+}
+
+/* Slightly stronger typography against galaxy */
+h1 {
+  text-shadow: 0 2px 25px rgba(0, 0, 0, 0.85);
+}
+
+.eyebrow {
+  text-shadow: 0 2px 15px #000;
+}
+
+/* =====================================================
+   WARROOM X — ICE BLUE GALAXY THEME
+   ===================================================== */
+
+:root {
+  --accent: #7ddcff;
+  --accent-bright: #b8ecff;
+  --accent-soft: rgba(125, 220, 255, 0.12);
+  --accent-border: rgba(125, 220, 255, 0.24);
+  --text-main: #f3f8fb;
+  --text-muted: #78909c;
+}
+
+/* BRAND */
+.brand-icon {
+  color: var(--accent);
+  background: rgba(125, 220, 255, 0.07);
+  border-color: rgba(125, 220, 255, 0.22);
+  box-shadow: 0 0 25px rgba(125, 220, 255, 0.06);
+}
+
+/* SIDEBAR ACTIVE */
+.nav-item.active {
+  color: var(--accent-bright);
+
+  background:
+    linear-gradient(90deg,
+      rgba(125, 220, 255, 0.11),
+      rgba(125, 220, 255, 0.035));
+
+  border-color: rgba(125, 220, 255, 0.22);
+
+  box-shadow:
+    inset 3px 0 0 var(--accent),
+    0 0 28px rgba(125, 220, 255, 0.035);
+}
+
+.nav-item.active svg {
+  color: var(--accent);
+}
+
+/* NAV HOVER */
+.nav-item {
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.nav-item:hover {
+  color: #eaf8ff;
+
+  background: rgba(125, 220, 255, 0.055);
+  border-color: rgba(125, 220, 255, 0.14);
+
+  transform: translateX(4px);
+
+  box-shadow:
+    0 0 22px rgba(125, 220, 255, 0.04);
+}
+
+.nav-item:hover svg {
+  color: var(--accent);
+}
+
+/* STATUS DOTS */
+.dot,
+.connected .dot,
+.engine-pill.active span {
+  background: var(--accent);
+
+  box-shadow:
+    0 0 6px var(--accent),
+    0 0 14px rgba(125, 220, 255, 0.45);
+}
+
+.connected,
+.engine-pill.active {
+  color: var(--accent-bright);
+}
+
+/* MAIN BUTTONS */
+button:not(.nav-item) {
+  position: relative;
+  overflow: hidden;
+
+  color: #061015;
+
+  background:
+    linear-gradient(135deg,
+      #b9efff 0%,
+      #79d8ff 50%,
+      #9ae6ff 100%);
+
+  border: 1px solid rgba(190, 240, 255, 0.6);
+
+  box-shadow:
+    0 7px 24px rgba(72, 190, 240, 0.10);
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease,
+    border-color 0.22s ease;
+}
+
+/* Moving light on hover */
+button:not(.nav-item)::after {
+  content: "";
+
+  position: absolute;
+  top: -50%;
+  left: -70%;
+
+  width: 45%;
+  height: 200%;
+
+  transform: rotate(20deg);
+
+  background:
+    linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.55),
+      transparent);
+
+  transition: left 0.5s ease;
+
+  pointer-events: none;
+}
+
+button:not(.nav-item):hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.08);
+
+  border-color: rgba(220, 248, 255, 0.9);
+
+  box-shadow:
+    0 8px 30px rgba(80, 200, 255, 0.18),
+    0 0 22px rgba(125, 220, 255, 0.12);
+}
+
+button:not(.nav-item):hover::after {
+  left: 130%;
+}
+
+button:not(.nav-item):active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* SECONDARY + GHOST BUTTONS */
+.secondary-button,
+.ghost-button {
+  color: #9eb5c0 !important;
+
+  background: rgba(4, 11, 15, 0.60) !important;
+
+  border: 1px solid rgba(125, 220, 255, 0.14) !important;
+
+  backdrop-filter: blur(10px);
+}
+
+.secondary-button:hover,
+.ghost-button:hover {
+  color: #dff7ff !important;
+
+  background: rgba(125, 220, 255, 0.08) !important;
+
+  border-color: rgba(125, 220, 255, 0.38) !important;
+
+  box-shadow:
+    0 0 25px rgba(125, 220, 255, 0.10) !important;
+}
+
+/* INPUT FOCUS */
+textarea:focus,
+input:focus,
+select:focus {
+  border-color: rgba(125, 220, 255, 0.5) !important;
+
+  box-shadow:
+    0 0 0 3px rgba(125, 220, 255, 0.055),
+    0 0 25px rgba(125, 220, 255, 0.05) !important;
+}
+
+/* HINDSIGHT STATUS */
+.memory-status {
+  border-color: rgba(125, 220, 255, 0.16);
+
+  background:
+    linear-gradient(135deg,
+      rgba(125, 220, 255, 0.045),
+      rgba(2, 8, 11, 0.78));
+}
+
+/* PANEL / INPUT BORDERS */
+.hero-panel textarea,
+.scanner textarea,
+.insight-card,
+.memory-card {
+  border-color: rgba(125, 220, 255, 0.13);
 }
